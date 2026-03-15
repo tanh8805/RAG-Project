@@ -28,18 +28,13 @@ public class LoginController {
 
   @PostMapping("/login")
   public ResponseEntity<?> login(@Valid @RequestBody LoginDTO loginDTO) {
-    try{
-      Authentication authentication = authenticationManager.authenticate(
-              new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword())
-      );
-      SecurityContextHolder.getContext().setAuthentication(authentication);
-      CustomerUserDetails principal = (CustomerUserDetails) authentication.getPrincipal();
-      String token = jwtService.generateJwt(principal);
-      return ResponseEntity.status(200).body(TokenResponseDTO.builder().token(token).status(200).build());
-    }
-    catch (Exception e){
-      return ResponseEntity.status(500).body(MessageResponseDTO.builder().message(e.getMessage()).status(500).build());
-    }
+    Authentication authentication = authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword())
+    );
+    SecurityContextHolder.getContext().setAuthentication(authentication);
+    CustomerUserDetails principal = (CustomerUserDetails) authentication.getPrincipal();
+    String token = jwtService.generateJwt(principal);
+    return ResponseEntity.status(200).body(TokenResponseDTO.builder().token(token).status(200).build());
   }
 }
 

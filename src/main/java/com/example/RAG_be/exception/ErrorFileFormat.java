@@ -1,10 +1,10 @@
 package com.example.RAG_be.exception;
+
 import java.util.*;
 import java.io.*;
 
-public class ErrorFileFormat {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        
-    }
+public class ErrorFileFormat extends RuntimeException {
+  public ErrorFileFormat(String message) {
+      super(message);
+  }
 }

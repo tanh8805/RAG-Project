@@ -1,10 +1,14 @@
 package com.example.RAG_be.repository;
+
+import com.example.RAG_be.entity.document.Document;
+import com.example.RAG_be.entity.user.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import java.util.*;
 import java.io.*;
 
-public class DocumentRepository {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        
-    }
+public interface DocumentRepository extends JpaRepository<Document, UUID> {
+  List<Document> findByFileName(String fileName);
+  List<Document> findByFilePath(String filePath);
+  boolean existsByFileNameAndUploadedBy(String fileName, User uploadedBy);
 }

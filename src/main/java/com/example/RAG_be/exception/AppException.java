@@ -1,10 +1,16 @@
 package com.example.RAG_be.exception;
+
+import lombok.Getter;
+
 import java.util.*;
 import java.io.*;
 
-public class AppException {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        
-    }
+@Getter
+public class AppException extends RuntimeException {
+  private final int status;
+
+  public AppException(int status, String message) {
+    super(message);
+    this.status = status;
+  }
 }

@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -36,10 +37,13 @@ public class SecurityConfig {
     http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/auth/login").permitAll()
+                    .requestMatchers("/auth/**").permitAll()
                     .anyRequest().authenticated()
             )
-            .addFilterBefore(jwtFilterChain, UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(jwtFilterChain, UsernamePasswordAuthenticationFilter.class)
+            .sessionManagement(session -> session
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            );
     return http.build();
   }
 }
