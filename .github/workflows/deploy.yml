@@ -29,17 +29,3 @@ jobs:
           tags: |
             ghcr.io/tanh8805/rag-backend:latest
             ghcr.io/tanh8805/rag-backend:v${{ github.run_number }}
-  deploy:
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up kubectl
-        uses: azure/setup-kubectl@v3
-
-      - name: Configure kubeconfig
-        run: |
-          mkdir -p $HOME/.kube
-          echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
-
-      - name: Rollout restart
-        run: kubectl rollout restart deployment/rag-backend
