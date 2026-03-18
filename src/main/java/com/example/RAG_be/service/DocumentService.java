@@ -51,7 +51,6 @@ public class DocumentService {
 
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
     restTemplate.postForEntity(
             fastApiUrl + "/api/process-document",
             new HttpEntity<>(body, headers),
