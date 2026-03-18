@@ -26,10 +26,10 @@ public class DocumentService {
   private final UserRepository userRepository;
   private final RestTemplate restTemplate;
 
-  @Value("${minio.url}")
+  @Value("MINIO_URL")
   private String minioUrl;
 
-  @Value("${fastapi.url}")
+  @Value("FASTAPI_URL")
   private String fastApiUrl;
 
   public void saveDocument(String fileName, String filePath, String fileType, String userId) {
